@@ -4,24 +4,24 @@
   box-sizing: border-box;
 }
 
-// hero section
 .hero {
   height: 30vh;
   background: url("../images/paul-felberbauer-672973-unsplash.jpg");
   background-size: cover;
   background-position: center;
   margin: 0 auto;
-  h1 {
-    width: 50vw;
-    display: block;
-    float: right;
-    background-color: rgba(160, 153, 147, 0.521);
-    color: white;
-    font-family: "Open sans", sans-serif;
-    font-size: 40px;
-    margin-top: 10vh;
-    padding: 20px 40px;
-  }
+}
+
+.hero h1 {
+  width: 50vw;
+  display: block;
+  float: right;
+  background-color: rgba(160, 153, 147, 0.521);
+  color: white;
+  font-family: "Open sans", sans-serif;
+  font-size: 40px;
+  margin-top: 10vh;
+  padding: 20px 40px;
 }
 
 .container {
@@ -33,23 +33,23 @@
   text-align: center;
 }
 
-// buttons
 .btn {
   font-size: 40px;
   padding: 5px 20px;
   margin: 10px;
 }
+
 #result {
   font-size: 40px;
-  color: rgb(100, 93, 86);
+  color: #645d56;
 }
+
 #newGame {
   background-color: black;
   color: white;
   font-size: 20px;
 }
 
-// modals and overlay
 .overlay {
   display: none;
   position: fixed;
@@ -58,10 +58,10 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
+}
 
-  &.show {
-    display: block;
-  }
+.overlay.show {
+  display: block;
 }
 
 .modal {
@@ -72,30 +72,31 @@
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
-
-  &.show {
-    display: block;
-  }
-
-  .close {
-    position: absolute;
-    right: 0;
-    top: 0;
-    padding: 5px;
-    color: #000;
-    text-decoration: none;
-  }
-
-  header {
-    font-size: 20px;
-    line-height: 30px;
-    min-height: 30px;
-    font-weight: bold;
-    padding: 0 30px;
-  }
-
-  .content {
-    min-height: 30px;
-    padding: 5px 30px;
-  }
 }
+
+.modal.show {
+  display: block;
+}
+
+.modal .close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px;
+  color: #000;
+  text-decoration: none;
+}
+
+.modal header {
+  font-size: 20px;
+  line-height: 30px;
+  min-height: 30px;
+  font-weight: bold;
+  padding: 0 30px;
+}
+
+.modal .content {
+  min-height: 30px;
+  padding: 5px 30px;
+}
+/*# sourceMappingURL=style.prefixed.css.map */
