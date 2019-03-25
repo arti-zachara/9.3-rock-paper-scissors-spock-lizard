@@ -1,7 +1,10 @@
 "use strict";
-var roundsNumber;
-var roundsPlayed = 0;
-var gameActive = true;
+
+var params = {
+  roundsNumber: null,
+  roundsPlayed: 0,
+  gameActive: true
+};
 
 // providing game's output
 var output = document.getElementById("output");
@@ -33,7 +36,7 @@ var playerMoves = document.querySelectorAll(".player-move");
 for (var i = 0; i < playerMoves.length; i++) {
   playerMoves[i].addEventListener("click", function() {
     var playerMoveChoice = this.getAttribute("data-move");
-    if (gameActive) {
+    if (params.gameActive) {
       // invoking playerMove function with a payer's choice parameter
       playerMove(playerMoveChoice);
     } else {
@@ -77,45 +80,25 @@ function playerMove(playerMoveChosen) {
   var computerMoveChoice = computerMove();
   var gameResult = determiningWinner(playerMoveChosen, computerMoveChoice);
   displayResult(playerWins, computerWins);
-  roundsPlayed++;
-  if (playerWins === roundsNumber) {
-    displayText(
-      "YOU WON THE ENTIRE GAME!!! Round " +
-        roundsPlayed +
-        ": <strong>" +
-        gameResult +
-        "</strong> won. You played <strong>" +
-        playerMoveChosen +
-        "</strong>, computer played <strong>" +
-        computerMoveChoice +
-        "</strong> "
-    );
-    gameActive = false;
-  } else if (computerWins === roundsNumber) {
-    displayText(
-      "COMPUTER WON THE ENTIRE GAME!!! Round " +
-        roundsPlayed +
-        ": <strong>" +
-        gameResult +
-        "</strong> won. You played <strong>" +
-        playerMoveChosen +
-        "</strong>, computer played <strong>" +
-        computerMoveChoice +
-        "</strong> "
-    );
-    gameActive = false;
+  params.roundsPlayed++;
+  var gameResultText =
+    " Round " +
+    params.roundsPlayed +
+    ": <strong>" +
+    gameResult +
+    "</strong> won. You played <strong>" +
+    playerMoveChosen +
+    "</strong>, computer played <strong>" +
+    computerMoveChoice +
+    "</strong> ";
+  if (playerWins === params.roundsNumber) {
+    displayText("YOU WON THE ENTIRE GAME!!!" + gameResultText);
+    params.gameActive = false;
+  } else if (computerWins === params.roundsNumber) {
+    displayText("COMPUTER WON THE ENTIRE GAME!!!" + gameResultText);
+    params.gameActive = false;
   } else {
-    displayText(
-      "Round " +
-        roundsPlayed +
-        ": <strong>" +
-        gameResult +
-        "</strong> won. You played <strong>" +
-        playerMoveChosen +
-        "</strong>, computer played <strong>" +
-        computerMoveChoice +
-        "</strong>"
-    );
+    displayText(gameResultText);
   }
 }
 
@@ -126,7 +109,7 @@ var newGame = document.getElementById("newGame"),
 newGame.addEventListener("click", function() {
   playerWins = 0;
   computerWins = 0;
-  roundsPlayed = 0;
+  params.roundsPlayed = 0;
   displayResult(playerWins, computerWins);
   displayText(
     "Here you will see the results of each play against the computer."
@@ -140,9 +123,11 @@ newGame.addEventListener("click", function() {
     rounds.innerHTML =
       "The value you provided is not a possible number of rounds";
   } else {
-    gameActive = true;
-    roundsNumber = parseInt(userInput);
+    params.gameActive = true;
+    params.roundsNumber = parseInt(userInput);
     rounds.innerHTML =
-      "The game will end after <strong>" + roundsNumber + "</strong> wins";
+      "The game will end after <strong>" +
+      params.roundsNumber +
+      "</strong> wins";
   }
 });
