@@ -3,7 +3,9 @@
 var params = {
   roundsNumber: null,
   roundsPlayed: 0,
-  gameActive: true
+  gameActive: true,
+  computerWins: 0,
+  playerWins: 0
 };
 
 // providing game's output
@@ -12,18 +14,16 @@ function displayText(text) {
   output.innerHTML = text + "<br>";
 }
 // providing game's result
-var computerWins = 0,
-  playerWins = 0,
-  result = document.getElementById("result");
-var displayResult = function(playerWins, computerWins) {
+var result = document.getElementById("result");
+var displayResult = function() {
   result.innerHTML =
     "<strong>" +
-    playerWins +
+    params.playerWins +
     "</strong> - <strong>" +
-    computerWins +
+    params.computerWins +
     "</strong>";
 };
-displayResult(playerWins, computerWins);
+displayResult();
 
 // when game is no longer active
 function inactiveGameDisplay() {
@@ -67,10 +67,10 @@ function determiningWinner(playerMoveChosen, computerMoveChoice) {
     (playerMoveChosen === "rock" && computerMoveChoice === "scissors") ||
     (playerMoveChosen === "scissors" && computerMoveChoice === "paper")
   ) {
-    playerWins++;
+    params.playerWins++;
     return "You";
   } else {
-    computerWins++;
+    params.computerWins++;
     return "Computer";
   }
 }
@@ -79,7 +79,7 @@ function determiningWinner(playerMoveChosen, computerMoveChoice) {
 function playerMove(playerMoveChosen) {
   var computerMoveChoice = computerMove();
   var gameResult = determiningWinner(playerMoveChosen, computerMoveChoice);
-  displayResult(playerWins, computerWins);
+  displayResult();
   params.roundsPlayed++;
   var gameResultText =
     " Round " +
@@ -91,10 +91,10 @@ function playerMove(playerMoveChosen) {
     "</strong>, computer played <strong>" +
     computerMoveChoice +
     "</strong> ";
-  if (playerWins === params.roundsNumber) {
+  if (params.playerWins === params.roundsNumber) {
     displayText("YOU WON THE ENTIRE GAME!!!" + gameResultText);
     params.gameActive = false;
-  } else if (computerWins === params.roundsNumber) {
+  } else if (params.computerWins === params.roundsNumber) {
     displayText("COMPUTER WON THE ENTIRE GAME!!!" + gameResultText);
     params.gameActive = false;
   } else {
@@ -107,10 +107,10 @@ var newGame = document.getElementById("newGame"),
   rounds = document.getElementById("rounds");
 
 newGame.addEventListener("click", function() {
-  playerWins = 0;
-  computerWins = 0;
+  params.playerWins = 0;
+  params.computerWins = 0;
   params.roundsPlayed = 0;
-  displayResult(playerWins, computerWins);
+  displayResult();
   displayText(
     "Here you will see the results of each play against the computer."
   );
