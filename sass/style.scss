@@ -1,0 +1,48 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.hero {
+  height: 30vh;
+  background: url("../images/paul-felberbauer-672973-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto;
+  h1 {
+    width: 50vw;
+    display: block;
+    float: right;
+    background-color: rgba(160, 153, 147, 0.521);
+    color: white;
+    font-family: "Open sans", sans-serif;
+    font-size: 40px;
+    margin-top: 10vh;
+    padding: 20px 40px;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 10px 0;
+  width: 80%;
+  font-family: "Open sans", sans-serif;
+  text-align: center;
+}
+
+.btn {
+  font-size: 40px;
+  padding: 5px 20px;
+  margin: 10px;
+}
+#result {
+  font-size: 40px;
+  color: rgb(100, 93, 86);
+}
+#newGame {
+  background-color: black;
+  color: white;
+  font-size: 20px;
+}
