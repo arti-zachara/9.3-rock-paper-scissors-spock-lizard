@@ -28,32 +28,19 @@ function inactiveGameDisplay() {
 }
 
 // Buttons allowing player to chose a move
-var playerMoveRock = document.getElementById("playerMove_rock"),
-  playerMovePaper = document.getElementById("playerMove_paper"),
-  playerMoveScissors = document.getElementById("playerMove_scissors");
+var playerMoves = document.querySelectorAll(".player-move");
 
-// invoking playerMove function with a payer's choice parameter
-playerMoveRock.addEventListener("click", function() {
-  if (gameActive) {
-    playerMove("rock");
-  } else {
-    inactiveGameDisplay();
-  }
-});
-playerMovePaper.addEventListener("click", function() {
-  if (gameActive) {
-    playerMove("paper");
-  } else {
-    inactiveGameDisplay();
-  }
-});
-playerMoveScissors.addEventListener("click", function() {
-  if (gameActive) {
-    playerMove("scissors");
-  } else {
-    inactiveGameDisplay();
-  }
-});
+for (var i = 0; i < playerMoves.length; i++) {
+  playerMoves[i].addEventListener("click", function() {
+    var playerMoveChoice = this.getAttribute("data-move");
+    if (gameActive) {
+      // invoking playerMove function with a payer's choice parameter
+      playerMove(playerMoveChoice);
+    } else {
+      inactiveGameDisplay();
+    }
+  });
+}
 
 // Computer move function randomizing the move
 function computerMove() {
