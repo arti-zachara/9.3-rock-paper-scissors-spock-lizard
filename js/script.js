@@ -146,15 +146,6 @@ function hideAllModals() {
   }
 }
 
-// links opening modals
-// var modalLinks = document.querySelectorAll(".show-modal");
-
-// for (var i = 0; i < modalLinks.length; i++) {
-//   modalLinks[i].addEventListener("click", function() {
-//     var modalLinkId = this.getAttributeNode("href").value;
-//     showModal(event, modalLinkId);
-//   });
-// }
 // function adding modal content
 var addModalContent = function(modalId, modalContentToBeAdded) {
   var modalChanged = document.querySelector(modalId);
