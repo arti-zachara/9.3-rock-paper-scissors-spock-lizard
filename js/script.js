@@ -74,7 +74,30 @@ function determiningWinner(playerMoveChosen, computerMoveChoice) {
     return "Computer";
   }
 }
+//
+function createProgressTable() {
+  var progressTableContent = "";
+  for (var i = 0; i < params.progress.length; i++) {
+    progressTableContent +=
+      "<tr><td>" +
+      params.progress[i].round +
+      "</td><td>" +
+      params.progress[i].winner +
+      "</td><td>" +
+      params.progress[i].playerMove +
+      "</td><td>" +
+      params.progress[i].computerMove +
+      "</td><td>" +
+      params.progress[i].roundResult +
+      "</td></tr>";
+  }
 
+  var progressTableHeading =
+    "<table><tr><th>Round</th><th>Winner</th><th>Player Move</th><th>Computer Move</th><th>Round Result</th></tr>";
+  var progressTable = progressTableHeading + progressTableContent + "</table>";
+  console.log(progressTable);
+  return progressTable;
+}
 // game mechanics invoked after player's choice
 function playerMove(playerMoveChosen) {
   var computerMoveChoice = computerMove();
@@ -90,6 +113,7 @@ function playerMove(playerMoveChosen) {
   };
   params.progress.push(roundResultProgress);
   console.log(params.progress);
+
   var gameResultText =
     " Round " +
     params.roundsPlayed +
@@ -104,12 +128,15 @@ function playerMove(playerMoveChosen) {
     params.playerWins === params.roundsNumber ||
     params.computerWins === params.roundsNumber
   ) {
+    var progressTable = createProgressTable();
     var winner = gameResult.toUpperCase();
-    var modalContent = winner + " WON THE ENTIRE GAME!!!" + gameResultText;
+    var modalContent =
+      "<p>" + winner + " WON THE ENTIRE GAME!!!</p>" + progressTable;
     var modalToBeDisplayed = "#modal-game-over";
     addModalContent(modalToBeDisplayed, modalContent);
     showModal(modalToBeDisplayed);
     params.gameActive = false;
+    displayText(gameResultText);
   } else {
     displayText(gameResultText);
   }
