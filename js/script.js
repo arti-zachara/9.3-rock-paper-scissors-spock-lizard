@@ -5,7 +5,8 @@ var params = {
   roundsPlayed: 0,
   gameActive: true,
   computerWins: 0,
-  playerWins: 0
+  playerWins: 0,
+  progress: []
 };
 
 // providing game's output
@@ -80,6 +81,15 @@ function playerMove(playerMoveChosen) {
   var gameResult = determiningWinner(playerMoveChosen, computerMoveChoice);
   displayResult();
   params.roundsPlayed++;
+  var roundResultProgress = {
+    round: params.roundsPlayed,
+    winner: gameResult,
+    playerMove: playerMoveChosen,
+    computerMove: computerMoveChoice,
+    roundResult: params.playerWins + " : " + params.computerWins
+  };
+  params.progress.push(roundResultProgress);
+  console.log(params.progress);
   var gameResultText =
     " Round " +
     params.roundsPlayed +
@@ -90,19 +100,15 @@ function playerMove(playerMoveChosen) {
     "</strong>, computer played <strong>" +
     computerMoveChoice +
     "</strong> ";
-  if (params.playerWins === params.roundsNumber) {
-    var modalContent = "YOU WON THE ENTIRE GAME!!!" + gameResultText;
+  if (
+    params.playerWins === params.roundsNumber ||
+    params.computerWins === params.roundsNumber
+  ) {
+    var winner = gameResult.toUpperCase();
+    var modalContent = winner + " WON THE ENTIRE GAME!!!" + gameResultText;
     var modalToBeDisplayed = "#modal-game-over";
     addModalContent(modalToBeDisplayed, modalContent);
     showModal(modalToBeDisplayed);
-    // displayText("YOU WON THE ENTIRE GAME!!!" + gameResultText);
-    params.gameActive = false;
-  } else if (params.computerWins === params.roundsNumber) {
-    var modalContent = "COMPUTER WON THE ENTIRE GAME!!!" + gameResultText;
-    var modalToBeDisplayed = "#modal-game-over";
-    addModalContent(modalToBeDisplayed, modalContent);
-    showModal(modalToBeDisplayed);
-    // displayText("COMPUTER WON THE ENTIRE GAME!!!" + gameResultText);
     params.gameActive = false;
   } else {
     displayText(gameResultText);
@@ -117,6 +123,7 @@ newGame.addEventListener("click", function() {
   params.playerWins = 0;
   params.computerWins = 0;
   params.roundsPlayed = 0;
+  params.progress = [];
   displayResult();
   displayText(
     "Here you will see the results of each play against the computer."
