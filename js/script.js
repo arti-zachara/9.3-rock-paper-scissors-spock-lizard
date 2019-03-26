@@ -91,10 +91,18 @@ function playerMove(playerMoveChosen) {
     computerMoveChoice +
     "</strong> ";
   if (params.playerWins === params.roundsNumber) {
-    displayText("YOU WON THE ENTIRE GAME!!!" + gameResultText);
+    var modalContent = "YOU WON THE ENTIRE GAME!!!" + gameResultText;
+    var modalToBeDisplayed = "#modal-game-over";
+    addModalContent(modalToBeDisplayed, modalContent);
+    showModal(modalToBeDisplayed);
+    // displayText("YOU WON THE ENTIRE GAME!!!" + gameResultText);
     params.gameActive = false;
   } else if (params.computerWins === params.roundsNumber) {
-    displayText("COMPUTER WON THE ENTIRE GAME!!!" + gameResultText);
+    var modalContent = "COMPUTER WON THE ENTIRE GAME!!!" + gameResultText;
+    var modalToBeDisplayed = "#modal-game-over";
+    addModalContent(modalToBeDisplayed, modalContent);
+    showModal(modalToBeDisplayed);
+    // displayText("COMPUTER WON THE ENTIRE GAME!!!" + gameResultText);
     params.gameActive = false;
   } else {
     displayText(gameResultText);
@@ -147,10 +155,14 @@ function hideAllModals() {
 //     showModal(event, modalLinkId);
 //   });
 // }
+// function adding modal content
+var addModalContent = function(modalId, modalContentToBeAdded) {
+  var modalChanged = document.querySelector(modalId);
+  modalChanged.querySelector(".content").innerHTML = modalContentToBeAdded;
+};
 
 // function opening modal
-var showModal = function(event, modalToBeShown) {
-  event.preventDefault();
+var showModal = function(modalToBeShown) {
   hideAllModals();
   document.querySelector(modalToBeShown).classList.add("show");
   document.querySelector("#modal-overlay").classList.add("show");
