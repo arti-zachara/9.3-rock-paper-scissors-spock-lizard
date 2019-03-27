@@ -47,7 +47,7 @@ for (var i = 0; i < playerMoves.length; i++) {
 
 // Computer move function randomizing the move
 function computerMove() {
-  var computerMoveRandom = Math.floor(Math.random() * 3) + 1;
+  var computerMoveRandom = Math.floor(Math.random() * 5) + 1;
   switch (computerMoveRandom) {
     case 1:
       return "rock";
@@ -55,6 +55,10 @@ function computerMove() {
       return "paper";
     case 3:
       return "scissors";
+    case 4:
+      return "spock";
+    case 5:
+      return "lizard";
   }
 }
 
@@ -65,7 +69,14 @@ function determiningWinner(playerMoveChosen, computerMoveChoice) {
   } else if (
     (playerMoveChosen === "paper" && computerMoveChoice === "rock") ||
     (playerMoveChosen === "rock" && computerMoveChoice === "scissors") ||
-    (playerMoveChosen === "scissors" && computerMoveChoice === "paper")
+    (playerMoveChosen === "scissors" && computerMoveChoice === "paper") ||
+    (playerMoveChosen === "rock" && computerMoveChoice === "lizard") ||
+    (playerMoveChosen === "lizard" && computerMoveChoice === "spock") ||
+    (playerMoveChosen === "spock" && computerMoveChoice === "scissors") ||
+    (playerMoveChosen === "scissors" && computerMoveChoice === "lizard") ||
+    (playerMoveChosen === "lizard" && computerMoveChoice === "paper") ||
+    (playerMoveChosen === "paper" && computerMoveChoice === "spock") ||
+    (playerMoveChosen === "spock" && computerMoveChoice === "rock")
   ) {
     params.playerWins++;
     return "You";
