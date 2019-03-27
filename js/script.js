@@ -6,7 +6,8 @@ var params = {
   gameActive: true,
   computerWins: 0,
   playerWins: 0,
-  progress: []
+  progress: [],
+  playerName: "You"
 };
 
 // providing game's output
@@ -18,11 +19,13 @@ function displayText(text) {
 var result = document.getElementById("result");
 var displayResult = function() {
   result.innerHTML =
-    "<strong>" +
+    "<p>" +
+    params.playerName +
+    " vs. Computer</p><p><strong>" +
     params.playerWins +
     "</strong> - <strong>" +
     params.computerWins +
-    "</strong>";
+    "</strong></p>";
 };
 displayResult();
 
@@ -79,7 +82,7 @@ function determiningWinner(playerMoveChosen, computerMoveChoice) {
     (playerMoveChosen === "spock" && computerMoveChoice === "rock")
   ) {
     params.playerWins++;
-    return "You";
+    return params.playerName;
   } else {
     params.computerWins++;
     return "Computer";
@@ -130,7 +133,9 @@ function playerMove(playerMoveChosen) {
     params.roundsPlayed +
     ": <strong>" +
     gameResult +
-    "</strong> won. You played <strong>" +
+    "</strong> won." +
+    params.playerName +
+    " played <strong>" +
     playerMoveChosen +
     "</strong>, computer played <strong>" +
     computerMoveChoice +
@@ -166,23 +171,47 @@ newGame.addEventListener("click", function() {
   displayText(
     "Here you will see the results of each play against the computer."
   );
-  var userInput = window.prompt("How many rounds do you want to play?");
-  if (userInput === null || userInput === "") {
-    rounds.innerHTML = "You didn't provide a value";
-  } else if (isNaN(userInput)) {
-    rounds.innerHTML = "The value you provided is not a number";
-  } else if (parseInt(userInput) <= 0) {
-    rounds.innerHTML =
-      "The value you provided is not a possible number of rounds";
+  showModal("#modal-new-game");
+});
+
+// getting new game params
+var submitNewGame = document.getElementById("submit-new-game");
+
+submitNewGame.addEventListener("click", function() {
+  params.gameActive = true;
+  console.log(document.getElementById("inputRounds").value);
+
+  params.roundsNumber = document.getElementById("inputRounds").value;
+  rounds.innerHTML =
+    "The game will end after <strong>" + params.roundsNumber + "</strong> wins";
+  console.log(params.roundsNumber);
+  console.log(typeof params.roundsNumber);
+  var playerInputName = document.getElementById("inputName").value;
+  console.log(playerInputName);
+  if (playerInputName === null || playerInputName === "") {
+    params.playerName = "You";
   } else {
-    params.gameActive = true;
-    params.roundsNumber = parseInt(userInput);
-    rounds.innerHTML =
-      "The game will end after <strong>" +
-      params.roundsNumber +
-      "</strong> wins";
+    params.playerName = playerInputName;
   }
 });
+
+// var userInput = window.prompt("How many rounds do you want to play?");
+
+// if (userInput === null || userInput === "") {
+//   rounds.innerHTML = "You didn't provide a value";
+// } else if (isNaN(userInput)) {
+//   rounds.innerHTML = "The value you provided is not a number";
+// } else if (parseInt(userInput) <= 0) {
+//   rounds.innerHTML =
+//     "The value you provided is not a possible number of rounds";
+// } else {
+//   params.gameActive = true;
+//   params.roundsNumber = parseInt(userInput);
+//   rounds.innerHTML =
+//     "The game will end after <strong>" +
+//     params.roundsNumber +
+//     "</strong> wins";
+// }
 
 // remove "show" class from all modals
 function hideAllModals() {
