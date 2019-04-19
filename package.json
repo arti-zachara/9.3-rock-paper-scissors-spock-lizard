@@ -1,7 +1,7 @@
 {
-  "name": "rock-paper-scissors",
+  "name": "rock-paper-scissors-spock-lizard",
   "version": "1.0.0",
-  "description": "",
+  "description": "Kodilla task 9.3 - Advanced game of Rock paper scissors Spock lizard",
   "main": "index.js",
   "scripts": {
     "test": "npm-run-all test:*",
